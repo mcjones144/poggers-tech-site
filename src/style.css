@@ -1,0 +1,80 @@
+/* Layout: one centred column on a faint blueprint grid; wordmark, tagline, three focus areas, footer. */
+:root {
+  --bg: #f5f7fa;
+  --grid: #e3e8ef;
+  --ink: #121a26;
+  --muted: #586374;
+  --rule: #d5dce6;
+  --accent: #2453d6;
+  --font-display: "Segoe UI", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e141d; --grid: #18212d; --ink: #e8edf4; --muted: #95a1b2; --rule: #263142; --accent: #7a9cff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e141d; --grid: #18212d; --ink: #e8edf4; --muted: #95a1b2; --rule: #263142; --accent: #7a9cff;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body, #app { height: 100%; }
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 44rem;
+  margin: 0 auto;
+  padding-block: clamp(2.5rem, 8vh, 6rem) 2rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px), 1.5rem);
+  padding-right: max(16px, env(safe-area-inset-right, 0px), 1.5rem);
+  gap: 3rem;
+}
+main { flex: 1; display: flex; flex-direction: column; gap: 2.5rem; justify-content: center; }
+h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 9vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+h1 .tld { color: var(--accent); }
+h1 .sub {
+  display: block; margin-top: .6rem;
+  font-weight: 400; font-size: .42em; letter-spacing: .02em; color: var(--muted);
+}
+.lede { margin: 0; max-width: 34rem; font-size: clamp(1.1rem, 2.6vw, 1.3rem); line-height: 1.5; text-wrap: pretty; }
+.areas {
+  list-style: none; margin: 0; padding: 1.5rem 0 0;
+  border-top: 1px solid var(--rule);
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem;
+}
+.areas li { display: flex; flex-direction: column; gap: .3rem; min-width: 0; }
+.areas h2 { margin: 0; font-size: .95rem; font-weight: 600; }
+.areas p { margin: 0; font-size: .9rem; color: var(--muted); line-height: 1.5; }
+footer {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1.5rem;
+  font-family: var(--font-mono); font-size: .75rem; color: var(--muted);
+}
+@media (max-width: 560px) {
+  .areas { grid-template-columns: 1fr; gap: 1.1rem; }
+}
